@@ -1,0 +1,19 @@
+.navbar{
+  height: 50px;
+  width: 100vw;
+
+  padding: 15px 20px;
+
+  display: flex;
+
+  background-color: whitesmoke;
+}
+
+.navbar__list{
+  display: flex;
+  align-items: center;
+}
+
+.navbar__item{
+  margin-right: 15px;
+}
