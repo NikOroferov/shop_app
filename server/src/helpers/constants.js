@@ -3,4 +3,6 @@ const USER_ROLE = {
   admin: "ADMIN",
 };
 
-export { USER_ROLE };
+const codeRegExp = /^[0-9]{9}$/;
+
+module.exports = { USER_ROLE, codeRegExp };

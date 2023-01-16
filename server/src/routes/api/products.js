@@ -1,121 +1,22 @@
 const express = require("express");
-const createError = require("http-errors");
-const { joiProductSchema, Product } = require("../../models/products");
+const { productsController: ctrl } = require("../../controllers");
+const { validation, ctrlWrapper } = require("../../middlewares");
+const { joiProductSchema } = require("../../models");
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
-  try {
-    const products = await Product.find({});
+router.get("/", ctrlWrapper(ctrl.getAll));
 
-    res.status(200).json({
-      status: "success",
-      code: 200,
-      data: {
-        result: products,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/:productId", ctrlWrapper(ctrl.getById));
 
-router.get("/:productId", async (req, res, next) => {
-  try {
-    const { productId } = req.params;
-    const result = await Product.findById(productId);
+router.post("/", validation(joiProductSchema), ctrlWrapper(ctrl.add));
 
-    if (!result) {
-      throw createError(404, `Product with id ${productId} is not found`);
-      return;
-    }
+router.delete("/:productId", ctrlWrapper(ctrl.deleteById));
 
-    res.status(200).json({
-      status: "success",
-      code: 200,
-      data: {
-        result,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.post("/", async (req, res, next) => {
-  try {
-    const { error } = joiProductSchema.validate(req.body);
-
-    if (error) {
-      error.status = 404;
-      next(error);
-
-      return;
-    }
-
-    const result = await Product.create(req.body);
-
-    res.status(201).json({
-      status: "success",
-      code: 201,
-      data: {
-        result,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete("/:productId", async (req, res, next) => {
-  try {
-    const { productId } = req.params;
-    const result = await Product.findByIdAndRemove(productId);
-
-    if (!result) {
-      throw createError(404, `Product with id ${productId} is not found`);
-      return;
-    }
-
-    res.status(200).json({
-      status: "success",
-      code: 200,
-      data: {
-        result,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.put("/:productId", async (req, res, next) => {
-  try {
-    const { error } = joiProductSchema.validate(req.body);
-    if (error) {
-      error.status = 400;
-      next(error);
-    }
-
-    const { productId } = req.params;
-    const result = await Contact.findByIdAndUpdate(productId, req.body);
-
-    if (!result) {
-      throw createError(404, `Contact with id=${productId} not found`);
-      return;
-    }
-
-    res.json({
-      message: "contact updated",
-      status: "success",
-      code: 200,
-      data: {
-        result,
-      },
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.put(
+  "/:productId",
+  validation(joiProductSchema),
+  ctrlWrapper(ctrl.updateById)
+);
 
 module.exports = router;

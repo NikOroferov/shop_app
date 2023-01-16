@@ -1,9 +1,8 @@
 const { Product } = require("../../models");
-const createError = require("http-errors");
 
-const getById = async (req, res, next) => {
+const deleteById = async (req, res, next) => {
   const { productId } = req.params;
-  const result = await Product.findById(productId).populate("owner");
+  const result = await Product.findByIdAndRemove(productId);
 
   if (!result) {
     throw createError(404, `Product with id ${productId} is not found`);
@@ -19,4 +18,4 @@ const getById = async (req, res, next) => {
   });
 };
 
-module.exports = getById;
+module.exports = deleteById;
