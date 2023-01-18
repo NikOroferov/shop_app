@@ -1,16 +1,16 @@
-const { joiProductSchema } = require("../../models");
+const { NotFound } = require("http-errors");
+const { Product } = require("../../models");
 
 const updateById = async (req, res, next) => {
-  const { productId } = req.params;
-  const result = await Contact.findByIdAndUpdate(productId, req.body);
+  const { id } = req.params;
+  const result = await Product.findByIdAndUpdate(id, req.body, { new: true });
 
   if (!result) {
-    throw createError(404, `Contact with id=${productId} not found`);
-    return;
+    throw new NotFound(`Product with id=${id} not found`);
   }
 
   res.status(200).json({
-    message: "contact updated",
+    message: "product updated",
     status: "success",
     code: 200,
     data: {

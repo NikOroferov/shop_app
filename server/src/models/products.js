@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+
 const { codeRegExp } = require("../helpers/constants");
 
 const joiProductSchema = Joi.object({
@@ -8,27 +9,30 @@ const joiProductSchema = Joi.object({
   code: Joi.string().pattern(codeRegExp),
 });
 
-const productSchema = Schema({
-  name: {
-    type: String,
-    required: [true, "Set name for product"],
+const productSchema = Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name for product"],
+    },
+    price: {
+      type: Number,
+      min: 0.01,
+    },
+    code: {
+      type: String,
+      required: true,
+      unique: true,
+      match: codeRegExp,
+    },
+    // owner: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "user",
+    //   required: true,
+    // },
   },
-  price: {
-    type: Number,
-    min: 0.01,
-  },
-  code: {
-    type: String,
-    required: true,
-    unique: true,
-    match: codeRegExp,
-  },
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
-  },
-});
+  { versionKey: false, timestamps: true }
+);
 
 const Product = model("product", productSchema);
 

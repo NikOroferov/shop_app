@@ -1,4 +1,4 @@
-const { joiProductSchema, Product } = require("../../models");
+const { Product } = require("../../models");
 
 const add = async (req, res, next) => {
   // const { _id } = req.user;

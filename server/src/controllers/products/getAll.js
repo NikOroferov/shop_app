@@ -1,7 +1,7 @@
 const { Product } = require("../../models");
 
 const getAll = async (req, res, next) => {
-  const products = await Product.find();
+  const products = await Product.find({});
   // { owner: _id }, "", {
   // skip,
   // limit: Number(limit),

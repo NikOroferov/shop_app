@@ -1,13 +1,13 @@
 const { Product } = require("../../models");
-const createError = require("http-errors");
+const { NotFound } = require("http-errors");
 
 const getById = async (req, res, next) => {
-  const { productId } = req.params;
-  const result = await Product.findById(productId).populate("owner");
+  const { id } = req.params;
+  const result = await Product.findById(id);
+  // .populate("owner");
 
   if (!result) {
-    throw createError(404, `Product with id ${productId} is not found`);
-    return;
+    throw new NotFound(`Product with id=${id} not found`);
   }
 
   res.status(200).json({

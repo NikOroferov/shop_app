@@ -1,10 +1,16 @@
 const { Product, joiProductSchema } = require("./products");
-const { User, joiUserSchema, joiUserRoleSchema } = require("./user");
+const {
+  User,
+  joiSignupSchema,
+  joiLoginSchema,
+  joiUserRoleSchema,
+} = require("./user");
 
 module.exports = {
-  joiProductSchema,
   Product,
+  joiProductSchema,
   User,
-  joiUserSchema,
+  joiSignupSchema,
+  joiLoginSchema,
   joiUserRoleSchema,
 };
