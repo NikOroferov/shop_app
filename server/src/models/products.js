@@ -7,6 +7,7 @@ const joiProductSchema = Joi.object({
   name: Joi.string().min(3).required(),
   price: Joi.number().required(),
   code: Joi.string().pattern(codeRegExp),
+  owner: Joi.string(),
 });
 
 const productSchema = Schema(
@@ -25,11 +26,10 @@ const productSchema = Schema(
       unique: true,
       match: codeRegExp,
     },
-    // owner: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "user",
-    //   required: true,
-    // },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { versionKey: false, timestamps: true }
 );
