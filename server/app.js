@@ -6,6 +6,8 @@ const logger = require("morgan");
 const productsRouter = require("./src/routes/api/products");
 const authRouter = require("./src/routes/api/auth");
 const usersRouter = require("./src/routes/api/users");
+const brandRouter = require("./src/routes/api/brand");
+const typeRouter = require("./src/routes/api/type");
 
 const app = express();
 
@@ -18,6 +20,8 @@ app
   .use("/api/products", productsRouter)
   .use("/api/auth", authRouter)
   .use("/api/users", usersRouter)
+  .use("/api/brand", brandRouter)
+  .use("/api/type", typeRouter)
   .use((req, res) => {
     res.status(404).json({ message: "Not found" });
   })

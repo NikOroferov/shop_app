@@ -1,16 +1,15 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const { USER_ROLE, emailRegExp } = require("../helpers/constants");
 
-const joiSignupSchema = Joi.object({
+const joiUserSchema = Joi.object({
   name: Joi.string().min(4).required(),
   email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required(),
   role: Joi.string()
     .valid(USER_ROLE.admin, USER_ROLE.user)
     .default(USER_ROLE.user),
-  // token: Joi.string(),
 });
 
 const joiLoginSchema = Joi.object({
@@ -43,10 +42,10 @@ const userSchema = Schema(
       required: true,
       minlength: 6,
     },
-    token: {
-      type: String,
-      default: null,
-    },
+    // token: {
+    //   type: String,
+    //   default: null,
+    // },
     role: {
       type: String,
       enum: [USER_ROLE.admin, USER_ROLE.user],
@@ -68,7 +67,7 @@ const User = model("user", userSchema);
 
 module.exports = {
   User,
-  joiSignupSchema,
+  joiUserSchema,
   joiLoginSchema,
   joiUserRoleSchema,
 };

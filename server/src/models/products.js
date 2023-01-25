@@ -1,13 +1,12 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-
-const { codeRegExp } = require("../helpers/constants");
+const { string } = require("joi");
 
 const joiProductSchema = Joi.object({
   name: Joi.string().min(3).required(),
   price: Joi.number().required(),
-  code: Joi.string().pattern(codeRegExp),
-  owner: Joi.string(),
+  raiting: Joi.number().default(0),
+  img: Joi.string(),
 });
 
 const productSchema = Schema(
@@ -20,20 +19,35 @@ const productSchema = Schema(
       type: Number,
       min: 0.01,
     },
-    code: {
-      type: String,
+    raiting: {
+      type: Number,
       required: true,
-      unique: true,
-      match: codeRegExp,
+      default: 0,
     },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+    img: {
+      type: String,
+    },
+    // owner: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "user",
+    // },
+  },
+  { versionKey: false, timestamps: true }
+);
+
+const productInfoSchema = Schema(
+  {
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
 const Product = model("product", productSchema);
+const ProductInfo = model("product_info", productInfoSchema);
 
-module.exports = { joiProductSchema, Product };
+module.exports = { joiProductSchema, Product, ProductInfo };
