@@ -1,0 +1,35 @@
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px 0;
+
+  font-size: 18px;
+  color: ghostwhite;
+
+  background-color: gray;
+}
+
+.nav{
+
+  &--list {
+    display: flex;
+  }
+
+  &--item {
+
+
+    &:not(:last-child){
+      margin-right: 15px;
+    }
+
+    & a {
+      color: ghostwhite;
+
+      &:hover{
+        opacity: 0.8;
+      }
+    }
+  }
+}
