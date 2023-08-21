@@ -18,7 +18,7 @@
   }
 
   &--item {
-
+    list-style-type: none;
 
     &:not(:last-child){
       margin-right: 15px;

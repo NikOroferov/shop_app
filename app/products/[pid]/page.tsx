@@ -1,4 +1,14 @@
-import { NextPage } from 'next'
+import {Metadata} from 'next';
+
+async function getData(id: string) {
+  const responce = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    next: {
+      revalidate: 60
+    }
+  });
+
+  return responce.json();
+}
 
 type Props = {
   params: {
@@ -6,9 +16,22 @@ type Props = {
   }
 }
 
+export async function generateMetadata ({params: {pid}}: Props ): Promise<Metadata>{
+  const post = await getData(pid);
 
-const Product: NextPage = ({params: {pid}}: Props) => {
-  return <div>Product</div>
+  return {
+    title: post.title,
+  }
 }
 
-export default Product
+const Product = async ({params: {pid}}: Props) => {
+  const post = await getData(pid);
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
+    </div>
+  )
+}
+
+export default Product;

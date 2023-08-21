@@ -11,7 +11,7 @@ const Header: FC = () => {
             <Link href="/">Home</Link>
           </li>
           <li className={styles["nav--item"]}>
-            <Link href="/blog">Products</Link>
+            <Link href="/products">Products</Link>
           </li>
           <li className={styles["nav--item"]}>
             <Link href="/about">About</Link>
