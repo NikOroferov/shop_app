@@ -1,31 +1,26 @@
-.header{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px 0;
-
-  font-size: 18px;
-  color: ghostwhite;
-
-  background-color: gray;
-}
-
 .nav{
 
   &--list {
     display: flex;
+
+    text-align: center;
   }
 
   &--item {
+    font-size: 20px;
     list-style-type: none;
 
     &:not(:last-child){
-      margin-right: 15px;
+      margin-right: 25px;
     }
 
     & a {
       color: ghostwhite;
+      transition: all 0.3s ease-in-out;
+
+      &.active{
+        color: burlywood;
+      }
 
       &:hover{
         opacity: 0.8;

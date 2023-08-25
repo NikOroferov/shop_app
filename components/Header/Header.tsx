@@ -1,23 +1,17 @@
-import { FC } from 'react'
-import Link from 'next/link'
-import styles from './Header.module.scss'
+import { FC } from 'react';
+import styles from './Header.module.scss';
+import Navigation from '../Navigation/Navigation';
+
+const navItems = [
+  {label: "Home", href: "/"},
+  {label: "Posts", href: "/posts"},
+  {label: "About", href: "/about"},
+]
 
 const Header: FC = () => {
   return (
     <header className={styles.header}>
-      <nav className={styles.nav}>
-        <ul className={styles["nav--list"]}>
-          <li className={styles["nav--item"]}>
-            <Link href="/">Home</Link>
-          </li>
-          <li className={styles["nav--item"]}>
-            <Link href="/products">Products</Link>
-          </li>
-          <li className={styles["nav--item"]}>
-            <Link href="/about">About</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navigation navLinks={navItems}/>
     </header>
   )
 }

@@ -1,0 +1,39 @@
+.search--form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 25px;
+}
+
+.search--input{
+  padding: 15px;
+
+  font-size: 16px;
+  background-color: transparent;
+  border: 2px solid burlywood;
+
+  &:focus-visible{
+    outline-color: gray;
+  }
+}
+
+.search--button{
+  padding: 15px 25px;
+
+  font-size: 16px;
+  color: white;
+
+  background-color: burlywood;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+
+  &:hover,
+  &:focus{
+    color: burlywood;
+    background-color: transparent;
+    border: 1px solid burlywood;
+    cursor: pointer;
+  }
+}
+
