@@ -2,12 +2,12 @@
 import PostSearch from '@/components/PostSearch/PostSearch';
 import Posts from '@/components/Posts/Posts';
 import { getAllPosts } from '@/services/getPosts';
-import { Metadata } from 'next';
+// import { Metadata } from 'next';
 import { useEffect, useState } from 'react';
 
-export const metadata: Metadata = {
-  title: "Products | Shop App",
-}
+// export const metadata: Metadata = {
+//   title: "Posts | Shop App",
+// }
 
 const Products = () => {
   const [posts, setPosts] = useState<any[]>([]);
